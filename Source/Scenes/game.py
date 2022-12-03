@@ -2,7 +2,7 @@ from Source.Scenes.base import BaseScene
 import pygame
 from Source.settings import Settings
 from Source.Objects.monster_base import MonsterBase
-
+from Source.Objects.image import Image
 
 class GameScene(BaseScene):
     def __init__(self):
@@ -15,6 +15,7 @@ class GameScene(BaseScene):
         self.objects.append(self.monster1)
         self.objects.append(self.monster2)
         self.objects.append(self.monster3)
+        self.objects.append(self.test_image)
 
 
 
