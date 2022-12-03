@@ -3,6 +3,7 @@ import pygame
 from Source.settings import Settings
 from Source.Objects.monster_base import MonsterBase
 from Source.Objects.image import Image
+from Source.Objects.text import Text
 
 class GameScene(BaseScene):
     def __init__(self):
