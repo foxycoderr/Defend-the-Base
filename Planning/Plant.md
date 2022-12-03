@@ -10,10 +10,3 @@
 - Mids - move mid, hitpoints mid
 - Heavies - move very slowly, massive hitpoints
 
-## Tasks:
-
-### Task 1: Create field and line for the mobs to follow
-
-- make a list of points of the road
-- make a grid for defences
-- make a base
