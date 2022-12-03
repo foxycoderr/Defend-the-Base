@@ -15,7 +15,7 @@ class GameScene(BaseScene):
         self.objects.append(self.monster1)
         self.objects.append(self.monster2)
         self.objects.append(self.monster3)
-        self.objects.append(self.test_image)
+
 
 
 
