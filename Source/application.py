@@ -1,30 +1,19 @@
 import pygame
-from Source.grid import Grid
-from Source.events import EventHandler
-from Source.path import Path
+from Source.Scenes.game import GameScene
 
 
 class Application:
     def __init__(self, screen):
-        self.objects = []
+        self.scenes = [GameScene()]
         self.screen = screen
         self.game_over = False
-        self.event_handler = EventHandler()
 
-        self.grid = Grid()
-        self.path = Path()
-
-        self.objects.append(self.grid)
-        self.objects.append(self.path)
-
-
-    def display(self):
-        for obj in self.objects:
-            obj.draw(self.screen)
-
+    def process_frame(self):
         pygame.display.flip()
+        for scene in self.scenes:
+            scene.logic()
+            scene.draw()
 
     def start(self):
         while not self.game_over:
-            self.display()
-            self.event_handler.process_logic()
+            self.process_frame()
