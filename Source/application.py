@@ -12,7 +12,7 @@ class Application:
 
     def process_frame(self):
 
-        #Settings.SCREEN.fill((0, 0, 0))
+        Settings.SCREEN.fill((0, 0, 0))
         for scene in self.scenes:
             scene.logic()
             scene.draw()
