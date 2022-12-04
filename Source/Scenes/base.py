@@ -1,11 +1,11 @@
 import pygame
-
+from Source.settings import Settings
 class BaseScene:
     def __init__(self):
         self.objects = []
 
     def check_close(self):
-        event = pygame.event.poll()
+        event = Settings.EVENT
         if event.type == pygame.QUIT:
             exit()
 
