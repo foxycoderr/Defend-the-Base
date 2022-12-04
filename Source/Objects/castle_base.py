@@ -12,7 +12,6 @@ class Castle:
     def draw(self):
         pygame.draw.rect(surface=Settings.SCREEN, rect=self.rect, color=self.color)
         self.hp_text.draw()
-        print("draw")
 
 
     def reduce_hp(self, amount):
