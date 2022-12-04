@@ -1,5 +1,6 @@
 from Source.Scenes.base import BaseScene
 from Source.Objects.monster_base import MonsterBase
+from Source.Objects.castle_base import Castle
 
 
 class GameScene(BaseScene):
@@ -9,7 +10,12 @@ class GameScene(BaseScene):
         self.monster1 = MonsterBase(self.path)
         self.monster2 = MonsterBase(self.path)
         self.monster3 = MonsterBase(self.path)
+        self.castle = Castle()
         self.progress = [0, 0, 0]
         self.objects.append(self.monster1)
         self.objects.append(self.monster2)
         self.objects.append(self.monster3)
+        self.objects.append(self.castle)
+
+
+

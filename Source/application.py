@@ -13,6 +13,7 @@ class Application:
 
         Settings.SCREEN.fill((0, 0, 0))
         Settings.FRAME += 1
+        Settings.EVENT = pygame.event.poll()
         for scene in self.scenes:
             scene.logic()
             scene.draw()
