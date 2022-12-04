@@ -5,16 +5,18 @@ from Source.settings import Settings
 
 
 class Button:
-    def __init__(self, x, y, width, height, font, text_color, text_size, text, bg_color=None, hover_color=None):
+    def __init__(self, x, y, width, height, font, text_color, text_size, text, bg_color=None, hover_color=None, outline=None, outline_color=(0,0,0), outline_width=5):
         self.text = Text(color=text_color, font=font, size=text_size, text=text, x=0, y=0)
         self.bodytype = 0
+        self.outline_width = outline_width
         self.bg_color = bg_color
-
+        self.outline = outline
+        self.outline_color = outline_color
         if bg_color:
-            self.body = [pygame.Rect(x, y, width, height), bg_color]
+            self.body = [pygame.Rect(x, y, height, width), bg_color]
             self.bodytype = 1
         else:
-            self.body = [pygame.Rect(x, y, width, height), None]
+            self.body = [pygame.Rect(x, y, height, width), None]
 
         self.text.rect.x = (self.body[0].width - self.text.texture.get_width()) / 2 + x
         self.text.rect.y = (self.body[0].height - self.text.texture.get_height()) / 2 + y
@@ -24,7 +26,8 @@ class Button:
     def draw(self):
         if self.bodytype == 1:
             pygame.draw.rect(surface=Settings.SCREEN, color=self.body[1], rect=self.body[0])
-
+            if self.outline:
+                pygame.draw.rect(surface=Settings.SCREEN, color=self.outline_color, rect=self.body[0], width=self.outline_width)
         self.text.draw()
 
     def on_hover(self):
@@ -38,8 +41,12 @@ class Button:
             return 0
 
     def on_click(self):
-        pass
+        event = Settings.EVENT
+        if event.type == pygame.MOUSEBUTTONUP:
+            pos = pygame.mouse.get_pos()
+            if self.body[0].collidepoint(pos):
+                return "TOWER_BUTTON_CLICKED"
 
     def logic(self):
         self.on_hover()
-        self.on_click()
+        return self.on_click()
