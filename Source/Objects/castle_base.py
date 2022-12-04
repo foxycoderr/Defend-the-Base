@@ -5,7 +5,7 @@ from Source.BaseClasses.text import Text
 class Castle:
     def __init__(self):
         self.hp = 100
-        self.rect = pygame.Rect(1740, 463, 60, 60)
+        self.rect = pygame.Rect(1740, 463, 120, 120)
         self.color = (255, 0, 0)
         self.hp_text = Text(text=f"HP: {self.hp}", color=(255, 255, 255), font="Candara", x=1730, y=10, size=20)
 
