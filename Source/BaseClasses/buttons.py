@@ -1,5 +1,5 @@
 import pygame
-from Source.Objects.text import Text
+from Source.BaseClasses.text import Text
 from Source.settings import Settings
 
 
