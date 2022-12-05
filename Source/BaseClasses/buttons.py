@@ -34,6 +34,7 @@ class Button:
                 pygame.draw.rect(surface=Settings.SCREEN, color=self.outline_color, rect=self.body[0], width=self.outline_width)
         self.text.draw()
 
+
     def on_hover(self):
         pos = pygame.mouse.get_pos()
         # checking whether the mouse is in the button, changing color to hover_color
