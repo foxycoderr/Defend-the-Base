@@ -45,7 +45,7 @@ class Button:
         if event.type == pygame.MOUSEBUTTONUP:
             pos = pygame.mouse.get_pos()
             if self.body[0].collidepoint(pos):
-                return "TOWER_BUTTON_CLICKED"
+                return 1
 
     def logic(self):
         self.on_hover()
