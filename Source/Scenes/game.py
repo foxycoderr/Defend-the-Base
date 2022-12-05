@@ -37,3 +37,4 @@ class GameScene(BaseScene):
                 a = object.logic()  # normal logic processing
                 if a == "TOWER_BUTTON_CLICKED":  # in case tower button is processed
                     self.objects[self.objects.index(self.tower)].visibility = not(self.objects[self.objects.index(self.tower)].visibility)  # changing cursor-following tower's visibility
+                    Settings.EVENT = pygame.event.poll()
