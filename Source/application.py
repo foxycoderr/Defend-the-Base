@@ -10,16 +10,22 @@ class Application:
         self.game_over = False
 
     def process_frame(self):
-
+        # wiping screen
         Settings.SCREEN.fill((0, 0, 0))
+        # updating frame
         Settings.FRAME += 1
+        # polling events
         Settings.EVENT = pygame.event.poll()
+
+        # drawing scenes and processing logic
         for scene in self.scenes:
             scene.logic()
             scene.draw()
 
+        # updating display
         pygame.display.flip()
 
     def start(self):
+        # starting game
         while not self.game_over:
             self.process_frame()
