@@ -1,7 +1,10 @@
+import pygame
 from Source.Scenes.base import BaseScene
 from Source.Objects.monster_base import MonsterBase
 from Source.Objects.castle_base import Castle
 from Source.Objects.tower_sprite_base import TowerSprite
+from Source.Objects.tower_button import TowerButton
+from Source.settings import Settings
 
 
 class GameScene(BaseScene):
@@ -11,29 +14,27 @@ class GameScene(BaseScene):
         self.monster1 = MonsterBase(self.path)
         self.monster2 = MonsterBase(self.path)
         self.monster3 = MonsterBase(self.path)
-        self.tower = TowerSprite(orig=True, visibility=True)
+        self.tower = TowerSprite(orig=True, visibility=False)
         self.castle = Castle()
         self.progress = [0, 0, 0]
         self.objects.append(self.monster1)
         self.objects.append(self.monster2)
         self.objects.append(self.monster3)
         self.objects.append(self.castle)
+        self.towerbutton = TowerButton()
+        self.objects.append(self.towerbutton)
         self.objects.append(self.tower)
 
     def logic(self):
-        self.check_close()
+        self.check_close()  # checking if game is closed
         for object in self.objects:
-            if type(object) == TowerSprite:
-                self.objects.append(object.logic())
-                print(self.objects)
-                if self.objects[len(self.objects) - 1] is None:
+            if type(object) == TowerSprite:  # checking if the tower sprite logic is being processed
+                self.objects.append(object.logic())  # adding the object's return (if a new tower is built, it is returned)
+                if self.objects[len(self.objects) - 1] is None:  # in case no new tower is built, None is added, has to b removed
                     self.objects.pop(len(self.objects) - 1)
 
-                print(self.objects[len(self.objects) - 1])
-
             else:
-                object.logic()
-
-
-
-
+                a = object.logic()  # normal logic processing
+                if a == "TOWER_BUTTON_CLICKED":  # in case tower button is processed
+                    self.objects[self.objects.index(self.tower)].visibility = not self.objects[self.objects.index(self.tower)].visibility  # changing cursor-following tower's visibility
+                    Settings.EVENT = pygame.event.poll()
