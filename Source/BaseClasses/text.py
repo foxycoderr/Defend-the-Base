@@ -15,9 +15,11 @@ class Text:
         self.rect = pygame.Rect(self.x, self.y, self.texture.get_width(), self.texture.get_height())
 
     def draw(self):
+        # updating texture, drawing text
         self.texture = self.font.render(self.text, True, self.color)
         Settings.SCREEN.blit(self.texture, self.rect)
 
     def logic(self):
+        # no default logic
         pass
 
