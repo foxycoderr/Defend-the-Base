@@ -18,6 +18,7 @@ class Text:
         # updating texture, drawing text
         self.texture = self.font.render(self.text, True, self.color)
         Settings.SCREEN.blit(self.texture, self.rect)
+        print(self.rect.width)
 
     def logic(self):
         # no default logic
