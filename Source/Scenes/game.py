@@ -5,6 +5,8 @@ from Source.Objects.castle_base import Castle
 from Source.Objects.tower_sprite_base import TowerSprite
 from Source.Objects.tower_button import TowerButton
 from Source.settings import Settings
+
+
 class GameScene(BaseScene):
     def __init__(self):
         super().__init__()
@@ -12,7 +14,7 @@ class GameScene(BaseScene):
         self.monster1 = MonsterBase(self.path)
         self.monster2 = MonsterBase(self.path)
         self.monster3 = MonsterBase(self.path)
-        self.tower = TowerSprite(orig=True, visibility=False)
+        self.tower_sprite = TowerSprite(visibility=False)
         self.castle = Castle()
         self.progress = [0, 0, 0]
         self.objects.append(self.monster1)
@@ -21,20 +23,28 @@ class GameScene(BaseScene):
         self.objects.append(self.castle)
         self.towerbutton = TowerButton()
         self.objects.append(self.towerbutton)
-        self.objects.append(self.tower)
-
+        self.objects.append(self.tower_sprite)
 
     def logic(self):
         self.check_close()  # checking if game is closed
         for object in self.objects:
-            if type(object) == TowerSprite:  # checking if the tower sprite logic is being processed
+            if object == self.tower_sprite:  # checking if the tower sprite logic is being processed
                 self.objects.append(object.logic())  # adding the object's return (if a new tower is built, it is returned)
                 if self.objects[len(self.objects) - 1] is None:  # in case no new tower is built, None is added, has to b removed
                     self.objects.pop(len(self.objects) - 1)
 
+            elif object == "New tower class goes here":  # if a tower is processed (only created for now due to lack of tower class)
+                print("Tower logic processing")
 
             else:
                 a = object.logic()  # normal logic processing
                 if a == "TOWER_BUTTON_CLICKED":  # in case tower button is processed
-                    self.objects[self.objects.index(self.tower)].visibility = not(self.objects[self.objects.index(self.tower)].visibility)  # changing cursor-following tower's visibility
+                    self.objects[self.objects.index(self.tower_sprite)].visibility = not self.objects[self.objects.index(self.tower_sprite)].visibility  # changing cursor-following tower's visibility
                     Settings.EVENT = pygame.event.poll()
+
+    def draw(self):
+        for object in self.objects:
+            if object == "New tower class goes here":  # only due to lack of tower class
+                pass
+            else:
+                object.draw()
