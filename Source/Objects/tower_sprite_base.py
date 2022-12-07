@@ -1,13 +1,13 @@
 import pygame
 from Source.settings import Settings
-
+from Source.Objects.base_tower import Tower
 
 class TowerSprite:
     TOWERS = []
 
     def __init__(self, can_build=False, visibility=False):
         self.can_build = can_build
-        self.visibility = visibility
+        self.visibility =   visibility
         self.rect = pygame.Rect(0, 0, 70, 70)
         self.color = (0, 0, 255, 50)
         self.outline_green = (0, 255, 0)
@@ -28,11 +28,22 @@ class TowerSprite:
     def is_clicked(self):
         event = Settings.EVENT
         if event.type == pygame.MOUSEBUTTONUP:  # if clicked
-            if self.visibility:  # if it's the original, create new tower
-                new_tower = "New tower class goes here"
-                self.TOWERS.append(new_tower)  # add new tower to towers
+            if self.visibility and self.can_build:  # if it's the original, create new tower
+                new_tower = Tower(self.rect.x, self.rect.y)
                 return new_tower
 
-    def logic(self):
+    def check_build(self, objects):
+        a = 0
+        for i in objects:
+            if i.rect.colliderect(self.rect) and i != self:
+                a = 1
+                break
+        if a:
+            self.can_build = 0
+        else:
+            self.can_build = 1
+
+    def logic(self, object):
+        self.check_build(object)
         return self.is_clicked()
 

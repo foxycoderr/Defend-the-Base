@@ -29,9 +29,9 @@ class GameScene(BaseScene):
         self.check_close()  # checking if game is closed
         for object in self.objects:
             if object == self.tower_sprite:  # checking if the tower sprite logic is being processed
-                self.objects.append(object.logic())  # adding the object's return (if a new tower is built, it is returned)
-                if self.objects[len(self.objects) - 1] is None:  # in case no new tower is built, None is added, has to b removed
-                    self.objects.pop(len(self.objects) - 1)
+                tmp = object.logic(self.objects) #getting return
+                if tmp: #if a new tower is built, tmp is True
+                    self.objects.append(tmp)  # adding the object's return (if a new tower is built, it is returned)
 
             elif object == "New tower class goes here":  # if a tower is processed (only created for now due to lack of tower class)
                 print("Tower logic processing")

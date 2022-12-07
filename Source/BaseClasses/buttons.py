@@ -19,7 +19,7 @@ class Button:
             self.bodytype = 1
         else:
             self.body = [pygame.Rect(x, y, height, width), None]
-
+        self.rect = self.body[0]
         # updating text position to center it in the body
         self.text.rect.x = (self.body[0].width - self.text.texture.get_width()) / 2 + x
         self.text.rect.y = (self.body[0].height - self.text.texture.get_height()) / 2 + y
