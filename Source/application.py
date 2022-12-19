@@ -29,6 +29,16 @@ class Application:
                 Settings.SCENE += 1
                 self.scene = self.scenes[Settings.SCENE]
 
+        if logic == "highscores":
+            # self.scene = self.scenes[2]
+            Settings.SCENE = 2
+            exit()
+
+        if logic == "settingscene":
+            # self.scene = self.scenes[3]
+            Settings.SCENE = 3
+            exit()
+
         # updating display
         pygame.display.flip()
 
