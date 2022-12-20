@@ -4,8 +4,9 @@ import math
 
 
 class MonsterBase:
-    def __init__(self, path):
-        self.rect = pygame.Rect(0.0, 637.0, 30.0, 30.0)
+    def __init__(self, path, type):
+        self.type = type
+        self.rect = pygame.Rect(0.0, 637.0, 15.0 * type, 15.0 * type)
         self.color = pygame.Color("green")
         self.image = None
         self.path = path
@@ -16,8 +17,8 @@ class MonsterBase:
         self.shift_y = 0
         self.x = 0.0
         self.y = 637.0
-        self.speed = 1
-
+        self.speed = 1 / type
+        self.hp = 100 * type
     def move(self):
         # get deltas
         deltaX = self.destination[0] - self.rect.x
