@@ -1,13 +1,14 @@
 import pygame
 from Source.Scenes.game import GameScene
 from Source.settings import Settings
-
+from Source.Scenes.menu import MenuScene
 
 class Application:
     def __init__(self, screen):
-        self.scenes = [GameScene()]
+        self.scenes = [MenuScene(), GameScene()]
         self.screen = screen
         self.game_over = False
+        self.scene = self.scenes[Settings.SCENE]
 
     def process_frame(self):
         # wiping screen
@@ -18,9 +19,25 @@ class Application:
         Settings.EVENT = pygame.event.poll()
 
         # drawing scenes and processing logic
-        for scene in self.scenes:
-            scene.logic()
-            scene.draw()
+        logic = self.scene.logic()
+        self.scene.draw()
+
+        if logic == "nextscene":
+            if Settings.SCENE == len(self.scenes) - 1:
+                exit()
+            else:
+                Settings.SCENE += 1
+                self.scene = self.scenes[Settings.SCENE]
+
+        if logic == "highscores":
+            # self.scene = self.scenes[2]
+            Settings.SCENE = 2
+            exit()
+
+        if logic == "settingscene":
+            # self.scene = self.scenes[3]
+            Settings.SCENE = 3
+            exit()
 
         # updating display
         pygame.display.flip()
